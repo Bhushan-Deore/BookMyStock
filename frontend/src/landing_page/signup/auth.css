@@ -1,0 +1,167 @@
+
+  /* PAGE LAYOUT */
+  
+  .form_container{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+  }
+  
+  
+  /* AUTH CARD */
+  
+  .form_container form{
+    width:420px;
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+  }
+  
+  
+  /* HEADING */
+  
+  .form_container form h2{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:26px;
+    font-weight:600;
+    color:#111;
+  }
+  
+  
+  /* INPUT GROUP */
+  
+  .form_container form div{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:18px;
+  }
+  
+  
+  /* LABEL */
+  
+  .form_container label{
+    font-size:14px;
+    color:#555;
+    margin-bottom:6px;
+  }
+  
+  
+  /* INPUT */
+  
+  .form_container input{
+    padding:12px 14px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
+    transition:all .2s ease;
+  }
+  
+  
+  .form_container input:focus{
+    outline:none;
+    border-color:#387ed1;
+    box-shadow:0 0 0 3px rgba(56,126,209,0.15);
+  }
+  
+  
+  /* BUTTON */
+  
+  .form_container button{
+    margin-top:10px;
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#387ed1;
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+  }
+  
+  
+  .form_container button:hover{
+    background:#2f6fba;
+  }
+  
+  
+  /* BOTTOM LINK */
+  
+  .form_container span{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    font-size:14px;
+    color:#666;
+  }
+  
+  
+  .form_container span a{
+    color:#387ed1;
+    text-decoration:none;
+    font-weight:500;
+  }
+  
+  
+  .form_container span a:hover{
+    text-decoration:underline;
+  }
+  
+  
+  /* TABLET */
+  
+  @media (max-width:768px){
+  
+    .form_container form{
+      width:100%;
+      max-width:420px;
+      padding:30px;
+    }
+  
+    .form_container h2{
+      font-size:22px;
+    }
+  
+  }
+  
+  
+  /* MOBILE */
+  
+  @media (max-width:480px){
+  
+    .form_container{
+      padding:15px;
+    }
+  
+    .form_container form{
+      padding:25px;
+    }
+  
+    .form_container input{
+      padding:11px;
+    }
+  
+    .form_container button{
+      padding:12px;
+    }
+  
+  }
+  
+  
+  /* LARGE SCREENS */
+  
+  @media (min-width:1400px){
+  
+    .form_container form{
+      width:460px;
+    }
+  
+  }

@@ -1,0 +1,24 @@
+body {
+    padding-top:100px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .accordion-button {
+    font-size: 1.25rem;
+    padding: 1.25rem;
+    background-color: #fff;
+  }
+  
+  .accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #f8f9fa;
+  }
+  
+  .accordion-body a {
+    color: #0d6efd;
+    text-decoration: none;
+  }
+  
+  .accordion-body a:hover {
+    text-decoration: underline;
+  }
