@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { apiClient } from "../../config/api";
 import "./auth.css";
 
 const Login = () => {
@@ -31,19 +31,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post(
-                "http://localhost:4000/login",
+            const { data } = await apiClient.post(
+                "/login",
                 {
                     ...inputValue,
-                },
-                { withCredentials: true }
+                }
             );
             console.log(data);
             const { success, message } = data;
             if (success) {
                 handleSuccess(message);
                 setTimeout(() => {
-                    navigate("/");
+                    navigate("/dashboard");
                 }, 1000);
             } else {
                 handleError(message);

@@ -14,6 +14,7 @@ import Navbar from './landing_page/Navbar.jsx';
 import Footer from './landing_page/Footer.jsx';
 import NotFound from './landing_page/NotFound.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import DashboardRedirect from "./landing_page/DashboardRedirect.jsx";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<HomePage/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path='/dashboard' element={<DashboardRedirect/>}/>
       <Route path='/about' element={<AboutPage/>}/>
       <Route path='/products' element={<ProductsPage/>}/>
       <Route path='/pricing/*' element={<PricingPage/>}/>

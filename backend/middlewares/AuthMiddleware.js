@@ -1,19 +1,46 @@
 const User = require("../model/UserModel");
-require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-module.exports.userVerification = (req, res) => {
-  const token = req.cookies.token
-  if (!token) {
-    return res.json({ status: false })
+const JWT_SECRET = process.env.JWT_SECRET || process.env.TOKEN_KEY;
+
+const unauthorizedResponse = (res) =>
+  res.status(401).json({
+    success: false,
+    redirect: true,
+    message: "Unauthorized",
+  });
+
+module.exports.authenticateToken = (req, res, next) => {
+  const token = req.cookies?.token;
+
+  if (!token || !JWT_SECRET) {
+    return unauthorizedResponse(res);
   }
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    if (err) {
-     return res.json({ status: false })
-    } else {
-      const user = await User.findById(data.id)
-      if (user) return res.json({ status: true, user: user.username })
-      else return res.json({ status: false })
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err || !decoded?.id) {
+      return unauthorizedResponse(res);
     }
-  })
-}
+
+    req.userId = decoded.id;
+    next();
+  });
+};
+
+module.exports.userVerification = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+
+    if (!user) {
+      return unauthorizedResponse(res);
+    }
+
+    return res.status(200).json({
+      success: true,
+      status: true,
+      user: user.username,
+    });
+  } catch (error) {
+    return unauthorizedResponse(res);
+  }
+};
