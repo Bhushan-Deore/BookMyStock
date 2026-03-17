@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
       try {
         const { data } = await apiClient.get("/verify");
         setIsAuthenticated(Boolean(data?.success));
-      } catch (error) {
+      } catch {
         setIsAuthenticated(false);
       } finally {
         setIsLoading(false);
