@@ -10,15 +10,22 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 const uri = process.env.MONGO_URL;
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute")
 
+const allowedOrigins = [
+    "https://main.df2o8s39u2pcw.amplifyapp.com",
+    "https://main.d2zver9i797lx.amplifyapp.com",
+    "http://localhost:5173",
+    "http://localhost:5174",
+];
+
 app.use(cors({
-    origin: true,
+    origin: allowedOrigins,
     credentials: true
-})); // allow all origins
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoute);

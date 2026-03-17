@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { apiClient } from "../../config/api";
 import "./auth.css";
 
 const Signup = () => {
@@ -32,12 +32,11 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/signup",
+      const { data } = await apiClient.post(
+        "/signup",
         {
           ...inputValue,
-        },
-        { withCredentials: true }
+        }
       );
       const { success, message } = data;
       if (success) {
