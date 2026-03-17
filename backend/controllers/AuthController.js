@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 
 const cookieOptions = {
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
+    sameSite: "none",
     maxAge: 3 * 24 * 60 * 60 * 1000,
 };
 
@@ -43,7 +43,7 @@ module.exports.Signup = async (req, res) => {
     }
 };
 
-module.exports.Login = async (req, res, next) => {
+module.exports.Login = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -60,7 +60,6 @@ module.exports.Login = async (req, res, next) => {
         const token = createSecretToken(user._id);
         res.cookie("token", token, cookieOptions);
         res.status(201).json({ message: "User logged in successfully", success: true });
-        next()
     } catch (error) {
         console.error(error);
     }

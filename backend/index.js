@@ -13,7 +13,15 @@ const { OrdersModel } = require("./model/OrdersModel");
 const PORT = process.env.PORT || 3000;
 const uri = process.env.MONGO_URL;
 const cookieParser = require("cookie-parser");
-const authRoute = require("./routes/AuthRoute")
+const authRoute = require("./routes/AuthRoute");
+const { authenticateToken } = require("./middlewares/AuthMiddleware");
+
+const allowedOrigins = [
+    "https://main.df2o8s39u2pcw.amplifyapp.com",
+    "https://main.d2zver9i797lx.amplifyapp.com",
+    "http://localhost:5173",
+    "http://localhost:5174",
+];
 
 const allowedOrigins = [
     "https://main.df2o8s39u2pcw.amplifyapp.com",
@@ -205,22 +213,22 @@ app.get("/", (req, res) => {
     res.send("Server running");
   });
 
-app.get("/allHoldings", async (req, res) => {
+app.get("/allHoldings", authenticateToken, async (req, res) => {
     let allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
 });
 
-app.get("/allPositions", async (req, res) => {
+app.get("/allPositions", authenticateToken, async (req, res) => {
     let allPositions = await PositionsModel.find({});
     res.json(allPositions);
 });
 
-app.get("/allOrders", async (req, res) => {
+app.get("/allOrders", authenticateToken, async (req, res) => {
     let allOrders = await OrdersModel.find({});
     res.json(allOrders);
 });
 
-app.post("/newOrder", async (req, res) => {
+app.post("/newOrder", authenticateToken, async (req, res) => {
     let newOrder = new OrdersModel({
         name: req.body.name,
         qty: req.body.qty,
