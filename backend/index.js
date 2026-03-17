@@ -23,12 +23,6 @@ const allowedOrigins = [
     "http://localhost:5174",
 ];
 
-const allowedOrigins = [
-    "https://main.df2o8s39u2pcw.amplifyapp.com",
-    "https://main.d2zver9i797lx.amplifyapp.com",
-    "http://localhost:5173",
-    "http://localhost:5174",
-];
 
 app.use(cors({
     origin: allowedOrigins,
