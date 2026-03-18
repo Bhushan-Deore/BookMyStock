@@ -23,11 +23,15 @@ const allowedOrigins = [
     "http://localhost:5174",
 ];
 
-
+    
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
 }));
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+  });
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoute);
