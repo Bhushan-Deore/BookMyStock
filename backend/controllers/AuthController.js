@@ -6,6 +6,7 @@ const getCookieOptions = () => ({
     httpOnly: true,
     secure: true,
     sameSite: "none",
+    path: "/",
     maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
@@ -35,6 +36,7 @@ module.exports.Signup = async (req, res) => {
             message: "User signed up successfully",
             success: true,
             user,
+            token,
         });
 
     } catch (error) {
@@ -59,7 +61,11 @@ module.exports.Login = async (req, res) => {
         }
         const token = createSecretToken(user._id);
         res.cookie("token", token, getCookieOptions());
-        res.status(201).json({ message: "User logged in successfully", success: true });
+        res.status(201).json({
+            message: "User logged in successfully",
+            success: true,
+            token,
+        });
     } catch (error) {
         console.error(error);
     }

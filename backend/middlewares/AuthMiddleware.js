@@ -11,7 +11,10 @@ const unauthorizedResponse = (res) =>
   });
 
 module.exports.authenticateToken = (req, res, next) => {
-  const token = req.cookies?.token;
+  const bearerToken = req.headers.authorization?.startsWith("Bearer ")
+    ? req.headers.authorization.slice(7)
+    : null;
+  const token = req.cookies?.token || bearerToken;
 
   if (!token || !JWT_SECRET) {
     return unauthorizedResponse(res);

@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { apiClient, FRONTEND_URL } from "../config/api";
+import {
+  apiClient,
+  bootstrapAuthTokenFromUrl,
+  FRONTEND_URL,
+  getAuthToken,
+} from "../config/api";
 
 const ProtectedRoute = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -7,6 +12,14 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     const verify = async () => {
+      bootstrapAuthTokenFromUrl();
+
+      if (!getAuthToken()) {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        return;
+      }
+
       try {
         const { data } = await apiClient.get("/verify");
         setIsAuthenticated(Boolean(data?.success));
