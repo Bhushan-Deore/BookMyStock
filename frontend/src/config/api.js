@@ -12,15 +12,51 @@ export const apiClient = axios.create({
   withCredentials: true,
 });
 
+const AUTH_TOKEN_KEY = "bookmystock_token";
+
+export const saveAuthToken = (token) => {
+  if (token) {
+    window.localStorage.setItem(AUTH_TOKEN_KEY, token);
+  }
+};
+
+export const getAuthToken = () => window.localStorage.getItem(AUTH_TOKEN_KEY);
+
+export const clearAuthToken = () => {
+  window.localStorage.removeItem(AUTH_TOKEN_KEY);
+};
+
+export const buildDashboardUrl = (token) => {
+  const dashboardUrl = new URL(DASHBOARD_URL);
+
+  if (token) {
+    dashboardUrl.hash = `token=${encodeURIComponent(token)}`;
+  }
+
+  return dashboardUrl.toString();
+};
+
+apiClient.interceptors.request.use((config) => {
+  const token = getAuthToken();
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => {
     if (response?.data?.redirect) {
+      clearAuthToken();
       window.location.href = "/";
     }
     return response;
   },
   (error) => {
     if (error?.response?.status === 401 || error?.response?.data?.redirect) {
+      clearAuthToken();
       window.location.href = "/";
     }
     return Promise.reject(error);

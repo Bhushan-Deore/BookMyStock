@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { apiClient } from "../../config/api";
+import { apiClient, buildDashboardUrl } from "../../config/api";
 import "./auth.css";
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
@@ -38,11 +37,11 @@ const Signup = () => {
           ...inputValue,
         }
       );
-      const { success, message } = data;
+      const { success, message, token } = data;
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://main.d2zver9i797lx.amplifyapp.com";
+          window.location.href = buildDashboardUrl(token);
         }, 1000);
       } else {
         handleError(message);
