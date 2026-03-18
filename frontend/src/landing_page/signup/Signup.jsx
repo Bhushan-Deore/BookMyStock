@@ -42,7 +42,7 @@ const Signup = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/dashboard");
+          window.location.href = "https://main.d2zver9i797lx.amplifyapp.com";
         }, 1000);
       } else {
         handleError(message);

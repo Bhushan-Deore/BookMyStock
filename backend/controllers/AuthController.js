@@ -2,16 +2,12 @@ const User = require("../model/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
 const bcrypt = require("bcryptjs");
 
-const getCookieOptions = (req) => {
-    const isHttps = req.secure || req.headers["x-forwarded-proto"] === "https";
-
-    return {
-        httpOnly: true,
-        secure: isHttps,
-        sameSite: isHttps ? "none" : "lax",
-        maxAge: 3 * 24 * 60 * 60 * 1000,
-    };
-};
+const getCookieOptions = () => ({
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+});
 
 module.exports.Signup = async (req, res) => {
     try {
