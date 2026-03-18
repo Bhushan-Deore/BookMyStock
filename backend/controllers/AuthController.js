@@ -29,7 +29,7 @@ module.exports.Signup = async (req, res) => {
 
         const token = createSecretToken(user._id);
 
-        res.cookie("token", token, getCookieOptions(req));
+        res.cookie("token", token, getCookieOptions());
 
         res.status(201).json({
             message: "User signed up successfully",
@@ -58,7 +58,7 @@ module.exports.Login = async (req, res) => {
             return res.json({ message: 'Incorrect password or email' })
         }
         const token = createSecretToken(user._id);
-        res.cookie("token", token, getCookieOptions(req));
+        res.cookie("token", token, getCookieOptions());
         res.status(201).json({ message: "User logged in successfully", success: true });
     } catch (error) {
         console.error(error);
