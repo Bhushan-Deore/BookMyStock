@@ -31,18 +31,26 @@ export const bootstrapAuthTokenFromUrl = () => {
   const searchToken = searchParams.get("token");
 
   const rawHash = window.location.hash.replace(/^#/, "");
+  const [hashPath = "", hashQuery = ""] = rawHash.split("?");
+  const hashParams = new URLSearchParams(hashQuery);
   const legacyHash = rawHash.startsWith("/") ? "" : rawHash;
-  const hashParams = new URLSearchParams(legacyHash);
-  const legacyToken = hashParams.get("token");
-  const token = searchToken || legacyToken;
+  const legacyParams = new URLSearchParams(legacyHash);
+  const token =
+    searchToken || hashParams.get("token") || legacyParams.get("token");
 
   if (token) {
     saveAuthToken(token);
     searchParams.delete("token");
+    hashParams.delete("token");
+    legacyParams.delete("token");
+
     const cleanedSearch = searchParams.toString();
+    const cleanedHash = rawHash.startsWith("/")
+      ? `${hashPath}${hashParams.toString() ? `?${hashParams.toString()}` : ""}`
+      : legacyParams.toString();
     const cleanedUrl = `${window.location.pathname}${
       cleanedSearch ? `?${cleanedSearch}` : ""
-    }${window.location.hash}`;
+    }${cleanedHash ? `#${cleanedHash}` : ""}`;
     window.history.replaceState(null, "", cleanedUrl);
   }
 
