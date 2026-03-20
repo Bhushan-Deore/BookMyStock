@@ -28,12 +28,17 @@ export const clearAuthToken = () => {
 
 export const buildDashboardUrl = (token, path = "/") => {
   const dashboardUrl = new URL(DASHBOARD_URL);
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const [hashPath, hashQuery = ""] = normalizedPath.split("?");
+  const hashParams = new URLSearchParams(hashQuery);
 
   if (token) {
-    dashboardUrl.searchParams.set("token", token);
+    hashParams.set("token", token);
   }
 
-  dashboardUrl.hash = path.startsWith("/") ? path : `/${path}`;
+  dashboardUrl.hash = hashParams.toString()
+    ? `${hashPath}?${hashParams.toString()}`
+    : hashPath;
 
   return dashboardUrl.toString();
 };
