@@ -27,17 +27,23 @@ export const clearAuthToken = () => {
 };
 
 export const bootstrapAuthTokenFromUrl = () => {
-  const hash = window.location.hash.replace(/^#/, "");
-  const params = new URLSearchParams(hash);
-  const token = params.get("token");
+  const searchParams = new URLSearchParams(window.location.search);
+  const searchToken = searchParams.get("token");
+
+  const rawHash = window.location.hash.replace(/^#/, "");
+  const legacyHash = rawHash.startsWith("/") ? "" : rawHash;
+  const hashParams = new URLSearchParams(legacyHash);
+  const legacyToken = hashParams.get("token");
+  const token = searchToken || legacyToken;
 
   if (token) {
     saveAuthToken(token);
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}${window.location.search}`
-    );
+    searchParams.delete("token");
+    const cleanedSearch = searchParams.toString();
+    const cleanedUrl = `${window.location.pathname}${
+      cleanedSearch ? `?${cleanedSearch}` : ""
+    }${window.location.hash}`;
+    window.history.replaceState(null, "", cleanedUrl);
   }
 
   return token;

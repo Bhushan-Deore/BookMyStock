@@ -26,12 +26,14 @@ export const clearAuthToken = () => {
   window.localStorage.removeItem(AUTH_TOKEN_KEY);
 };
 
-export const buildDashboardUrl = (token) => {
+export const buildDashboardUrl = (token, path = "/") => {
   const dashboardUrl = new URL(DASHBOARD_URL);
 
   if (token) {
-    dashboardUrl.hash = `token=${encodeURIComponent(token)}`;
+    dashboardUrl.searchParams.set("token", token);
   }
+
+  dashboardUrl.hash = path.startsWith("/") ? path : `/${path}`;
 
   return dashboardUrl.toString();
 };

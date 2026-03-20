@@ -1,24 +1,177 @@
 body {
-    padding-top:100px;
-    font-family: 'Inter', sans-serif;
+  padding-top: 88px;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.accordion-button {
+  font-size: 1.25rem;
+  padding: 1.25rem;
+  background-color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #000;
+  background-color: #f8f9fa;
+}
+
+.accordion-body a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.accordion-body a:hover {
+  text-decoration: underline;
+}
+
+.site-shell {
+  min-height: 100vh;
+}
+
+.site-shell main {
+  width: 100%;
+}
+
+.site-navbar {
+  background-color: #fff;
+}
+
+.site-navbar .container,
+.site-footer .container {
+  width: min(100% - 2rem, 1200px);
+}
+
+.navbar-brand {
+  display: inline-flex;
+  align-items: center;
+  max-width: min(220px, 60vw);
+}
+
+.navbar-brand img {
+  width: 100%;
+}
+
+.site-navbar .navbar-toggler {
+  border-color: rgba(0, 0, 0, 0.1);
+  padding: 0.45rem 0.7rem;
+}
+
+.site-navbar .navbar-collapse {
+  flex-grow: 0;
+}
+
+.site-navbar .nav-link {
+  font-weight: 500;
+}
+
+.responsive-section {
+  overflow-x: clip;
+}
+
+.site-footer {
+  background-color: rgb(250, 250, 250);
+}
+
+.footer-grid {
+  row-gap: 2rem;
+}
+
+.footer-brand img {
+  width: min(220px, 80%);
+}
+
+.footer-links a {
+  display: block;
+  margin-top: 0.65rem;
+  color: #6c757d;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.footer-links a:hover {
+  color: #212529;
+}
+
+.footer-disclaimer {
+  font-size: 12px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.auth-page {
+  width: min(100% - 1.5rem, 460px);
+  margin: 0 auto;
+}
+
+.form_container {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 3rem;
+}
+
+@media (max-width: 991.98px) {
+  body {
+    padding-top: 82px;
+  }
+
+  .site-navbar .navbar-collapse {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+  }
+
+  .site-navbar .navbar-nav {
+    gap: 0.5rem !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  body {
+    padding-top: 78px;
+  }
+
+  .site-navbar .container,
+  .site-footer .container {
+    width: min(100% - 1.25rem, 1200px);
+  }
+
+  .footer-brand img {
+    width: min(200px, 75%);
+  }
+
+  .footer-bottom-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    max-width: 170px;
+  }
+
+  .form_container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
   }
 
   .accordion-button {
-    font-size: 1.25rem;
-    padding: 1.25rem;
-    background-color: #fff;
+    font-size: 1rem;
+    padding: 1rem;
   }
-  
-  .accordion-button:not(.collapsed) {
-    color: #000;
-    background-color: #f8f9fa;
-  }
-  
-  .accordion-body a {
-    color: #0d6efd;
-    text-decoration: none;
-  }
-  
-  .accordion-body a:hover {
-    text-decoration: underline;
-  }
+}
