@@ -10,6 +10,13 @@ const getCookieOptions = () => ({
     maxAge: 3 * 24 * 60 * 60 * 1000,
 });
 
+const buildProfilePayload = (user) => ({
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+    createdAt: user.createdAt,
+});
+
 module.exports.Signup = async (req, res) => {
     try {
         const { email, password, username, createdAt } = req.body;
@@ -19,11 +26,9 @@ module.exports.Signup = async (req, res) => {
             return res.json({ message: "User already exists" });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         const user = await User.create({
             email,
-            password: hashedPassword,
+            password,
             username,
             createdAt,
         });
@@ -35,7 +40,7 @@ module.exports.Signup = async (req, res) => {
         res.status(201).json({
             message: "User signed up successfully",
             success: true,
-            user,
+            user: buildProfilePayload(user),
             token,
         });
 
@@ -65,8 +70,34 @@ module.exports.Login = async (req, res) => {
             message: "User logged in successfully",
             success: true,
             token,
+            user: buildProfilePayload(user),
         });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
 }
+
+module.exports.Profile = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId).select("_id username email createdAt");
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            user: buildProfilePayload(user),
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Unable to fetch profile",
+        });
+    }
+};

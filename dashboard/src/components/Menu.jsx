@@ -1,99 +1,84 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+const navItems = [
+  { label: "Dashboard", path: "/" },
+  { label: "Orders", path: "/orders" },
+  { label: "Holdings", path: "/holdings" },
+  { label: "Positions", path: "/positions" },
+  { label: "Funds", path: "/funds" },
+  { label: "Apps", path: "/apps" },
+];
+
+const isRouteActive = (pathname, path) => {
+  if (path === "/") {
+    return pathname === "/";
+  }
+
+  return pathname.startsWith(path);
+};
 
 const Menu = () => {
-  const [selectedMenu, setSelectedMenu] = useState(0);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleMenuClick = (index) => {
-    setSelectedMenu(index);
-  };
+  const pathname = useMemo(() => {
+    const currentPath = location.pathname || "/";
+    return currentPath === "" ? "/" : currentPath;
+  }, [location.pathname]);
 
-  const handleProfileClick = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
+  const userName = "BookMyStock User";
+  const userInitials = "BM";
 
-  const menuClass = "menu";
-  const activeMenuClass = "menu selected";
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
-      <div className="menus">
+      <div className="menu-branding">
+        <img src="logo.png" alt="BookMyStock logo" className="dashboard-logo" />
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={isMobileMenuOpen}
+          aria-label="Toggle dashboard navigation"
+          onClick={() => setIsMobileMenuOpen((current) => !current)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+
+      <div className={`menus ${isMobileMenuOpen ? "open" : ""}`}>
         <ul>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/"
-              onClick={() => handleMenuClick(0)}
-            >
-              <p className={selectedMenu === 0 ? activeMenuClass : menuClass}>
-                Dashboard
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/orders"
-              onClick={() => handleMenuClick(1)}
-            >
-              <p className={selectedMenu === 1 ? activeMenuClass : menuClass}>
-                Orders
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/holdings"
-              onClick={() => handleMenuClick(2)}
-            >
-              <p className={selectedMenu === 2 ? activeMenuClass : menuClass}>
-                Holdings
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/positions"
-              onClick={() => handleMenuClick(3)}
-            >
-              <p className={selectedMenu === 3 ? activeMenuClass : menuClass}>
-                Positions
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/funds"
-              onClick={() => handleMenuClick(4)}
-            >
-              <p className={selectedMenu === 4 ? activeMenuClass : menuClass}>
-                Funds
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/apps"
-              onClick={() => handleMenuClick(6)}
-            >
-              <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
-                Apps
-              </p>
-            </Link>
-          </li>
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                className={isRouteActive(pathname, item.path) ? "menu selected" : "menu"}
+                to={item.path}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
         </ul>
-        <hr />
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
-        </div>
+
+        <div className="menu-divider" />
+
+        <Link
+          className={`profile-link ${isRouteActive(pathname, "/profile") ? "active" : ""}`}
+          to="/profile"
+          onClick={closeMenu}
+        >
+          <div className="profile">
+            <div className="avatar">{userInitials}</div>
+            <div className="profile-copy">
+              <p className="username">{userName}</p>
+              <span>Profile</span>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );
