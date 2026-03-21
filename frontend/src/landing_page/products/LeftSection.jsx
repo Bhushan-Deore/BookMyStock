@@ -1,25 +1,36 @@
 import React from "react";
 
-function LeftSection({imageURL, productName, productDescription, tryDemo, learnMore, googlePlay, appStore}) {
-    return(
-        <div className="container mt-5">
-            <div className="row">
-                <div className="col-7">
-                    <img src={imageURL} alt="ProductImage" style={{width:"80%", height:"80%"}}/>
-                </div>
-                
-                <div className="col-5">
-                    <h2 className="m-5">{productName}</h2>
-                    <p className="fs-5 text-muted ms-5 pe-5">{productDescription}</p>
-                    <a href={tryDemo} style={{textDecoration:"none"}} className="m-5 ">Try Demo <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href={learnMore} style={{textDecoration:"none"}} className="m-5 ">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                    <br /><br />
-                    <a href={googlePlay} style={{textDecoration:"none"}} className="m-5 "> <img src="media/images/googlePlayBadge.svg"/> </a>
-                    <a href={appStore} style={{textDecoration:"none"}} className="m-5 "> <img src="media/images/appstoreBadge.svg"/></a>
-                </div>
-            </div>
+function LeftSection({ imageURL, productName, productDescription, tryDemo, learnMore, googlePlay, appStore }) {
+  return (
+    <section className="container product-showcase responsive-section-block">
+      <div className="row align-items-center g-4 g-lg-5">
+        <div className="col-12 col-lg-7">
+          <div className="product-image-shell">
+            <img src={imageURL} alt={productName} className="product-image" />
+          </div>
         </div>
-    );
+
+        <div className="col-12 col-lg-5">
+          <div className="product-content">
+            <h2>{productName}</h2>
+            <p>{productDescription}</p>
+            <div className="product-links">
+              <a href={tryDemo || "/products"} className="section-link">Try Demo <span aria-hidden="true">→</span></a>
+              <a href={learnMore || "/products"} className="section-link">Learn More <span aria-hidden="true">→</span></a>
+            </div>
+            <div className="product-badges">
+              <a href={googlePlay || "/products"} aria-label={`${productName} on Google Play`}>
+                <img src="media/images/googlePlayBadge.svg" alt="Google Play" />
+              </a>
+              <a href={appStore || "/products"} aria-label={`${productName} on the App Store`}>
+                <img src="media/images/appstoreBadge.svg" alt="App Store" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default LeftSection;

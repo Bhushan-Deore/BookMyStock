@@ -1,49 +1,66 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+const partners = [
+  {
+    image: "media/images/zerodhaFundhouse.png",
+    alt: "Zerodha Fund House",
+    description: "Our asset management venture building simple and transparent index funds.",
+  },
+  {
+    image: "media/images/sensibullLogo.svg",
+    alt: "Sensibull",
+    description: "Options trading platform for strategies, analysis, and rich data insights.",
+  },
+  {
+    image: "media/images/tijori.svg",
+    alt: "Tijori",
+    description: "Investment research platform with detailed insights on stocks, sectors, and supply chains.",
+  },
+  {
+    image: "media/images/streakLogo.png",
+    alt: "Streak",
+    description: "Systematic trading platform to create and backtest strategies without coding.",
+  },
+  {
+    image: "media/images/smallcaseLogo.png",
+    alt: "Smallcase",
+    description: "Thematic investing platform for diversified baskets of stocks and ETFs.",
+  },
+  {
+    image: "media/images/dittoLogo.png",
+    alt: "Ditto",
+    description: "Personalized advice on life and health insurance with no spam or mis-selling.",
+  },
+];
 
 function Universe() {
-    return (
-        <div className="container mt-5">
-            <div className="row text-center mb-5 ">
-                <h3>The BookMyStock Universe</h3>
-                <h5 className="mt-5">Extend your trading and investment experience even further with our partner platforms</h5>
-                <div className="col-4 p-5">
-                    <img src="media/images/zerodhaFundhouse.png" alt="zerodhaFundhouse" style={{ width: "55%" }} className="mt-5" />
-                    <p className="text-muted p-3">Our asset management venture
-                        that is creating simple and transparent index
-                        funds to help you save for your goals.</p>
-                    <br />
-                    <img src="media/images/streakLogo.png" alt="streakLogo" style={{ width: "50%" }} className="mt-5" />
-                    <p className="text-muted p-3">Systematic trading platform that allows you to create and backtest strategies without coding.</p>
-                </div>
-                <div className="col-4 p-5">
-                    <img src="media/images/sensibullLogo.svg" alt="sensibullLogo" style={{ width: "70%" }} className="mt-5" />
-                    <p className="text-muted p-3">Options trading platform that lets you
-                        create strategies, analyze positions, and examine
-                        data points like open interest, FII/DII, and more.
-                    </p>
-                    <br />
-                    <img src="media/images/smallcaseLogo.png" alt="smallcaseLogo" style={{ width: "70%" }} className="mt-5" />
-                    <p className="text-muted p-3">Thematic investing platform
-                        that helps you invest in diversified
-                        baskets of stocks on ETFs.</p>
-                </div>
-                <div className="col-4 p-5">
-                    <img src="media/images/tijori.svg" alt="tijori" style={{ width: "45%" }} className="mt-5" />
-                    <p className="text-muted p-3">Investment research platform
-                        that offers detailed insights on stocks,
-                        sectors, supply chains, and more.
-                    </p>
-                    <br />
-                    <img src="media/images/dittoLogo.png" alt="dittoLogo" style={{ width: "40%" }} className="mt-5" />
-                    <p className="text-muted p-3">Personalized advice on life
-                        and health insurance. No spam
-                        and no mis-selling.</p>
-                </div>
-                <button className ="p-2 mb-5 btn btn-primary fs-4 fw-semibold" style={{width:"20%",margin:"0 auto"}}>Sign up now</button>
+  return (
+    <section className="container responsive-section-block universe-section">
+      <div className="text-center mb-4 mb-md-5">
+        <h3 className="section-heading">The BookMyStock Universe</h3>
+        <p className="section-copy">
+          Extend your trading and investment experience even further with partner
+          platforms built for focused use cases.
+        </p>
+      </div>
 
-            </div>
-        </div>
-    );
+      <div className="universe-grid">
+        {partners.map((partner) => (
+          <article key={partner.alt} className="universe-card">
+            <img src={partner.image} alt={partner.alt} className="universe-logo" />
+            <p>{partner.description}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="text-center mt-4 mt-md-5">
+        <Link className="btn btn-primary hero-cta" to="/signup">
+          Sign up now
+        </Link>
+      </div>
+    </section>
+  );
 }
 
 export default Universe;

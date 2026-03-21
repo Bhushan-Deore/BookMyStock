@@ -1,37 +1,52 @@
 import React from "react";
 
 function Hero() {
-    return (
-        <div className="container">
-            <div className="row py-5">
-                <h4 className="text-center my-5 ">We pioneered the discount broking model in India.<br />
-                    Now, we are breaking ground with our technology.</h4>
+  return (
+    <section className="container responsive-section-block about-section">
+      <div className="about-intro text-center">
+        <p className="support-kicker">About BookMyStock</p>
+        <h1 className="section-heading">
+          We pioneered the discount broking model in India.
+          <br className="d-none d-md-block" />
+          Now, we are breaking ground with technology.
+        </h1>
+      </div>
 
-            </div>
-            <div className="row  p-5 mt-5 border-top text-muted " style={{ lineHeight: "1.8", fontSize: "1.2em" }}>
-                <div className="col-6 p-5">
-                    <p>We kick-started operations on the 15th of August, 2010 with the goal of breaking all barriers that traders and investors face in India in terms of cost, support, and technology. We named the company BookMyStock to reflect a simple belief: investing in stocks should be as easy as booking a service online.
-                    </p>
+      <div className="about-story-grid">
+        <article className="about-story-card">
+          <p>
+            We kick-started operations on August 15, 2010 with the goal of breaking
+            barriers that traders and investors face in India in terms of cost,
+            support, and technology.
+          </p>
+          <p>
+            We named the company BookMyStock to reflect a simple belief: investing in
+            stocks should be as easy as booking a service online.
+          </p>
+          <p>
+            Today, our pricing model and in-house technology have made us one of the
+            most trusted names in retail investing.
+          </p>
+        </article>
 
-                    <p>Today, our disruptive pricing models and in-house technology have made us the biggest stock broker in India. </p>
-
-                    <p>Over 1.6+ crore clients place billions of orders every year through our powerful ecosystem of investment platforms, contributing over 15% of all Indian retail trading volumes.</p>
-                </div>
-                <div className="col-6 p-5">
-                    <p>
-                        In addition, we run a number of popular open online educational and community initiatives to empower retail traders and investors.
-                    </p>
-                    <p>
-                        Rainmatter, our fintech fund and incubator, has invested in several fintech startups with the goal of growing the Indian capital markets.
-                    </p>
-                    <p>
-                        And yet, we are always up to something new every day. Catch up on the latest updates on our blog or see what the media is saying about us or learn more about our business and product philosophies.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    );
+        <article className="about-story-card">
+          <p>
+            Over 1.6+ crore clients place billions of orders every year through our
+            ecosystem of investment platforms, contributing over 15% of Indian retail
+            trading volumes.
+          </p>
+          <p>
+            We also run open educational and community initiatives that empower retail
+            investors and traders with better financial knowledge.
+          </p>
+          <p>
+            And we are always building what comes next—new experiences, stronger
+            tools, and simpler ways to participate in the markets.
+          </p>
+        </article>
+      </div>
+    </section>
+  );
 }
 
 export default Hero;

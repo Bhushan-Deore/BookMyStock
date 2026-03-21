@@ -399,6 +399,260 @@ a {
   border-left: 4px solid #ff9800;
 }
 
+
+.stats-section {
+  display: grid;
+  gap: 2rem;
+}
+
+.stats-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.stats-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.stats-item {
+  padding: 1.25rem;
+  border: 1px solid #e8edf5;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+}
+
+.stats-item h3,
+.pricing-overview-card h2,
+.product-content h2,
+.team-profile h3 {
+  margin: 0 0 0.75rem;
+  color: #1f2937;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+.stats-item p,
+.pricing-overview-card p,
+.product-content p,
+.universe-card p,
+.team-bio p,
+.about-story-card p {
+  margin: 0;
+  color: #5f6b7a;
+  line-height: 1.8;
+}
+
+.stats-visual-card,
+.about-story-card,
+.team-card,
+.product-content,
+.product-image-shell,
+.universe-card,
+.pricing-overview-card,
+.pricing-tabs-shell,
+.pricing-table-shell {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 24px;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.05);
+}
+
+.stats-visual-card {
+  padding: 1.5rem;
+}
+
+.stats-visual {
+  width: 100%;
+}
+
+.stats-links,
+.product-links,
+.team-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.stats-links {
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.stats-press-strip {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.about-intro {
+  margin-bottom: 2.5rem;
+}
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.about-story-card,
+.team-card,
+.product-content,
+.universe-card,
+.pricing-overview-card,
+.pricing-table-shell {
+  padding: 1.5rem;
+}
+
+.about-story-card {
+  display: grid;
+  gap: 1rem;
+}
+
+.team-card {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.team-profile {
+  text-align: center;
+}
+
+.team-profile p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.team-avatar {
+  width: min(220px, 70%);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+}
+
+.team-bio {
+  display: grid;
+  gap: 1rem;
+}
+
+.team-links a {
+  color: #387ed1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.product-showcase {
+  padding-block: 2rem;
+}
+
+.product-image-shell {
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.product-image {
+  width: 100%;
+  max-height: 440px;
+  object-fit: contain;
+}
+
+.product-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.product-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.product-badges img {
+  height: 44px;
+}
+
+.product-hero-copy {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.universe-grid,
+.pricing-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.universe-card,
+.pricing-overview-card {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.universe-logo {
+  max-width: 180px;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+.pricing-page-hero {
+  padding-bottom: 2rem;
+}
+
+.pricing-tabs-section {
+  padding-top: 0;
+}
+
+.pricing-tabs-shell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-tab {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #5f6b7a;
+  font-weight: 600;
+}
+
+.pricing-tab.active,
+.pricing-tab:hover {
+  color: #387ed1;
+  background: #f1f6fe;
+}
+
+.pricing-table-shell {
+  overflow-x: auto;
+}
+
+.pricing-table {
+  min-width: 720px;
+  margin-bottom: 0;
+}
+
+.pricing-table td,
+.pricing-table th {
+  white-space: nowrap;
+  vertical-align: top;
+  padding: 1rem;
+}
+
+.pricing-table ul {
+  padding-left: 1rem;
+}
+
 @media (max-width: 1024px) {
   body {
     padding-top: 82px;
@@ -411,8 +665,15 @@ a {
   }
 
   .pricing-grid,
-  .support-ticket-grid {
+  .support-ticket-grid,
+  .universe-grid,
+  .pricing-overview-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-story-grid,
+  .team-card {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -463,8 +724,23 @@ a {
   }
 
   .pricing-grid,
-  .support-ticket-grid {
+  .support-ticket-grid,
+  .universe-grid,
+  .pricing-overview-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-links,
+  .product-links,
+  .product-badges,
+  .team-links,
+  .pricing-tabs-shell {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pricing-tab {
+    width: 100%;
   }
 
   .support-hero-header {
