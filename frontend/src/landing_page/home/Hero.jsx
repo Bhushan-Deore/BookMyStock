@@ -1,17 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Hero() {
-    return(
-       <div className="container p-5 mb-5">
-        <div className="row text-center">
-            <img src="media/images/homeHero.png" alt="Hero Image" className="mb-5"/>
-            <h2 className="mt-5">Invest in everything</h2>
-            <h4 className="fw-normal">Online platform to invest in stocks, derivatives, mutual funds, ETFs, bonds, and more.</h4>
-            <button className ="p-2 mt-5 mb-5 btn btn-primary fs-4 fw-semibold" style={{width:"20%",margin:"0 auto"}}>Sign up now</button>
+  return (
+    <section className="container responsive-section-block hero-section">
+      <div className="row align-items-center g-4 g-lg-5">
+        <div className="col-12 text-center">
+          <img src="media/images/homeHero.png" alt="Hero" className="hero-visual mb-4 mb-md-5" />
+          <h1 className="hero-title">Invest in everything</h1>
+          <p className="hero-copy">
+            Online platform to invest in stocks, derivatives, mutual funds, ETFs,
+            bonds, and more.
+          </p>
+          <Link className="btn btn-primary hero-cta" to="/signup">
+            Sign up now
+          </Link>
         </div>
-        
-       </div>
-    );
+      </div>
+    </section>
+  );
 }
 
 export default Hero;

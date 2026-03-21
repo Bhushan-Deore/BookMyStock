@@ -1,38 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+
+const navItems = [
+  { label: "Signup", to: "/signup" },
+  { label: "About", to: "/about" },
+  { label: "Products", to: "/products" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Support", to: "/support" },
+];
 
 function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg border-bottom fixed-top site-navbar">
-            <div className="container">
-                <Link className="navbar-brand" to="/">
-                    <img src="media/images/BookMyStockLogonew.png" alt="BookMyStock logo" />
-                </Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav nav-underline ms-auto gap-3">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/signup">Signup</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/about">About</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/products">Products</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/pricing">Pricing</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/support">Support</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    );
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <nav className="site-navbar border-bottom fixed-top">
+      <div className="container site-navbar-inner">
+        <Link className="navbar-brand" to="/" aria-label="BookMyStock home">
+          <img src="media/images/BookMyStockLogonew.png" alt="BookMyStock logo" />
+        </Link>
+
+        <button
+          className="site-nav-toggle"
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls="site-navigation"
+          aria-label="Toggle navigation"
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <div id="site-navigation" className={`site-nav-panel ${isOpen ? "open" : ""}`}>
+          <ul className="site-nav-links">
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `site-nav-link${isActive ? " active" : ""}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Navbar;

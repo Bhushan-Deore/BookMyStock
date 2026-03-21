@@ -1,7 +1,19 @@
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #424242;
+  background: #ffffff;
+}
+
+html {
+  overflow-x: hidden;
+}
+
 body {
   padding-top: 88px;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  color: #424242;
+  background: #fff;
 }
 
 * {
@@ -11,6 +23,10 @@ body {
 img {
   max-width: 100%;
   height: auto;
+}
+
+a {
+  color: inherit;
 }
 
 .accordion-button {
@@ -42,39 +58,86 @@ img {
 }
 
 .site-navbar {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
 }
 
 .site-navbar .container,
-.site-footer .container {
-  width: min(100% - 2rem, 1200px);
+.site-footer .container,
+.container {
+  width: min(100% - 2rem, 1180px);
+}
+
+.site-navbar-inner {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .navbar-brand {
   display: inline-flex;
   align-items: center;
   max-width: min(220px, 60vw);
+  flex-shrink: 0;
 }
 
 .navbar-brand img {
   width: 100%;
 }
 
-.site-navbar .navbar-toggler {
-  border-color: rgba(0, 0, 0, 0.1);
-  padding: 0.45rem 0.7rem;
+.site-nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+  cursor: pointer;
 }
 
-.site-navbar .navbar-collapse {
-  flex-grow: 0;
+.site-nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 4px 0;
+  background: #424242;
+  border-radius: 999px;
 }
 
-.site-navbar .nav-link {
+.site-nav-panel {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #666;
   font-weight: 500;
+  transition: 0.2s ease;
 }
 
-.responsive-section {
-  overflow-x: clip;
+.site-nav-link:hover,
+.site-nav-link.active {
+  color: #387ed1;
+  background: #f1f6fe;
 }
 
 .site-footer {
@@ -103,6 +166,7 @@ img {
 
 .footer-disclaimer {
   font-size: 12px;
+  line-height: 1.8;
 }
 
 .footer-bottom-links {
@@ -117,42 +181,300 @@ img {
   margin: 0 auto;
 }
 
-.form_container {
-  min-height: calc(100vh - 180px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0 3rem;
+.responsive-section,
+.responsive-section-block {
+  overflow-x: clip;
 }
 
-@media (max-width: 991.98px) {
+.responsive-section-block {
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+}
+
+.hero-section,
+.open-account-section {
+  text-align: center;
+}
+
+.hero-visual {
+  width: min(100%, 860px);
+  margin-inline: auto;
+}
+
+.hero-title,
+.section-heading {
+  color: #1f2937;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-copy,
+.section-copy {
+  color: #5f6b7a;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.75;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.section-copy.text-start {
+  margin-inline: 0;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min(100%, 220px);
+  min-height: 48px;
+  padding: 0.9rem 1.5rem;
+  margin-top: 1.5rem;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.section-illustration {
+  width: min(100%, 540px);
+  margin-inline: auto;
+}
+
+.feature-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #5f6b7a;
+  line-height: 1.9;
+}
+
+.press-logos {
+  width: min(100%, 460px);
+}
+
+.section-link {
+  color: #387ed1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.section-link:hover {
+  color: #2f6fba;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.pricing-tile,
+.support-ticket-card,
+.support-side-panel {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 20px;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.05);
+}
+
+.pricing-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+  min-height: 100%;
+}
+
+.pricing-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.pricing-tile p {
+  margin: 0;
+  color: #5f6b7a;
+  line-height: 1.6;
+}
+
+.support-hero {
+  background-color: rgb(247, 247, 247);
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.support-hero-inner {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.support-hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.support-kicker {
+  margin: 0 0 0.5rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.support-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #1f2937;
+}
+
+.support-hero-button {
+  min-height: 48px;
+  padding-inline: 1.4rem;
+  border-radius: 14px;
+}
+
+.support-search-shell {
+  background: #fff;
+  border: 1px solid #d9e2ef;
+  border-radius: 20px;
+  padding: 0.35rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.support-search-input {
+  width: 100%;
+  min-height: 56px;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.support-ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.support-ticket-card,
+.support-side-panel {
+  padding: 1.5rem;
+}
+
+.support-ticket-card h2,
+.support-side-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  color: #1f2937;
+}
+
+.support-ticket-card ul,
+.support-side-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.support-ticket-card li + li,
+.support-side-panel li + li {
+  margin-top: 0.85rem;
+}
+
+.support-ticket-card a,
+.support-side-panel a {
+  color: #5f6b7a;
+  text-decoration: none;
+  line-height: 1.6;
+}
+
+.support-ticket-card a:hover,
+.support-side-panel a:hover {
+  color: #387ed1;
+}
+
+.support-alert-panel {
+  border-left: 4px solid #ff9800;
+}
+
+@media (max-width: 1024px) {
   body {
     padding-top: 82px;
   }
 
-  .site-navbar .navbar-collapse {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e9ecef;
+  .site-navbar .container,
+  .site-footer .container,
+  .container {
+    width: min(100% - 1.5rem, 1180px);
   }
 
-  .site-navbar .navbar-nav {
-    gap: 0.5rem !important;
+  .pricing-grid,
+  .support-ticket-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
   body {
     padding-top: 78px;
   }
 
-  .site-navbar .container,
-  .site-footer .container {
-    width: min(100% - 1.25rem, 1200px);
+  .site-navbar-inner {
+    min-height: 78px;
+    position: relative;
   }
 
-  .footer-brand img {
-    width: min(200px, 75%);
+  .site-nav-toggle {
+    display: inline-block;
+  }
+
+  .site-nav-panel {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 0.75rem;
+    background: #fff;
+    border: 1px solid #e8edf5;
+    border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  }
+
+  .site-nav-panel.open {
+    display: block;
+  }
+
+  .site-nav-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-copy,
+  .section-copy {
+    max-width: 100%;
+  }
+
+  .pricing-grid,
+  .support-ticket-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-hero-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-hero-button,
+  .hero-cta {
+    width: 100%;
   }
 
   .footer-bottom-links {
@@ -160,14 +482,32 @@ img {
   }
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 480px) {
+  .site-navbar .container,
+  .site-footer .container,
+  .container {
+    width: min(100% - 1rem, 1180px);
+  }
+
   .navbar-brand {
     max-width: 170px;
   }
 
-  .form_container {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+  .responsive-section-block {
+    padding-block: 2.5rem;
+  }
+
+  .hero-title,
+  .section-heading,
+  .support-hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .pricing-tile,
+  .support-ticket-card,
+  .support-side-panel {
+    border-radius: 16px;
+    padding: 1.2rem;
   }
 
   .accordion-button {

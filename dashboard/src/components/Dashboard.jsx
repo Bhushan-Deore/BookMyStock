@@ -11,12 +11,21 @@ import Summary from "./Summary";
 import WatchList from "./WatchList";
 import { GeneralContextProvider } from "./GeneralContext";
 
-const Dashboard = () => {
+const Dashboard = ({ isSidebarOpen, onCloseSidebar }) => {
   return (
     <div className="dashboard-container">
+      <div
+        className={`dashboard-sidebar-backdrop ${isSidebarOpen ? "open" : ""}`}
+        onClick={onCloseSidebar}
+        aria-hidden="true"
+      />
+
       <GeneralContextProvider>
-        <WatchList />
+        <aside className={`watchlist-panel ${isSidebarOpen ? "open" : ""}`}>
+          <WatchList />
+        </aside>
       </GeneralContextProvider>
+
       <main className="content">
         <Routes>
           <Route path="/" element={<Summary />} />
