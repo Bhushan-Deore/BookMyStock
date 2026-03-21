@@ -18,7 +18,7 @@ const isRouteActive = (pathname, path) => {
   return pathname.startsWith(path);
 };
 
-const Menu = () => {
+const Menu = ({ onNavigate }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -30,7 +30,10 @@ const Menu = () => {
   const userName = "BookMyStock User";
   const userInitials = "BM";
 
-  const closeMenu = () => setIsMobileMenuOpen(false);
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+    onNavigate?.();
+  };
 
   return (
     <div className="menu-container">
