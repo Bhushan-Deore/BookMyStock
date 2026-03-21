@@ -1,21 +1,26 @@
 import React from "react";
 
-function RightSection({imageURL, productName, productDescription, learnMore}) {
-    return(
-        <div className="container">
-            <div className="row">
-            <div className="col-5">
-                    <h2 className="m-5">{productName}</h2>
-                    <p className="fs-5 text-muted ms-5 pe-5">{productDescription}</p>
-                    <a href={learnMore} style={{textDecoration:"none"}} className="m-5 ">Learn More <i class="fa-solid fa-arrow-right"></i></a>
-                    
-                </div>
-                <div className="col-7">
-                    <img src={imageURL} alt="ProductImage" style={{width:"100%", height:"80%"}}/>
-                </div>
+function RightSection({ imageURL, productName, productDescription, learnMore }) {
+  return (
+    <section className="container product-showcase responsive-section-block">
+      <div className="row align-items-center g-4 g-lg-5">
+        <div className="col-12 col-lg-5 order-2 order-lg-1">
+          <div className="product-content">
+            <h2>{productName}</h2>
+            <p>{productDescription}</p>
+            <div className="product-links">
+              <a href={learnMore || "/products"} className="section-link">Learn More <span aria-hidden="true">→</span></a>
             </div>
+          </div>
         </div>
-    );
+        <div className="col-12 col-lg-7 order-1 order-lg-2">
+          <div className="product-image-shell">
+            <img src={imageURL} alt={productName} className="product-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default RightSection;

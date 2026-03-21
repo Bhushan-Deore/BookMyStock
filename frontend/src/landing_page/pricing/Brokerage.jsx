@@ -1,27 +1,30 @@
 import React from "react";
-import { Outlet,Link } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
+const tabs = [
+  { label: "Equity", to: "/pricing" },
+  { label: "Currency", to: "/pricing/currency" },
+  { label: "Commodity", to: "/pricing/commodity" },
+];
 
 function Brokerage() {
-    return (
-        <>
-            <div className="container border-bottom mt-5 pt-5">
-                <ul className="nav nav-underline m-2">
-                    <li className="nav-item fs-3 me-5">
-                        <Link className="nav-link" to={"/pricing"} >Equity</Link>
-                    </li>
-                    <li className="nav-item fs-3 me-5">
-                        <Link className="nav-link" to={"/pricing/currency"}>Currency</Link>
-                    </li>
-                    <li className="nav-item fs-3 me-5">
-                        <Link className="nav-link" to={"/pricing/commodity"} >Commodity</Link>
-                    </li>
-                </ul>
-            </div>
-            <Outlet/>
-            
-        </>
-    );
+  return (
+    <section className="container responsive-section-block pt-0 pricing-tabs-section">
+      <div className="pricing-tabs-shell">
+        {tabs.map((tab) => (
+          <NavLink
+            key={tab.to}
+            to={tab.to}
+            end={tab.to === "/pricing"}
+            className={({ isActive }) => `pricing-tab${isActive ? " active" : ""}`}
+          >
+            {tab.label}
+          </NavLink>
+        ))}
+      </div>
+      <Outlet />
+    </section>
+  );
 }
 
 export default Brokerage;

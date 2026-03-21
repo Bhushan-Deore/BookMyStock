@@ -1,15 +1,18 @@
 import React from "react";
 
 function Hero() {
-    return(
-        <div className="container pb-5 border-bottom">
-            <div className="row text-center m-5">
-                <h2>BookMyStock Products</h2>
-                <p className="fs-3">Sleek, modern, and intuitive trading platforms</p>
-                <p className="fs-5">Check out our <a href="" style={{textDecoration:"none"}}>investment offerings <i class="fa-solid fa-arrow-right"></i></a></p>
-            </div>
-        </div>
-    );
+  return (
+    <section className="container responsive-section-block border-bottom product-hero-section">
+      <div className="text-center product-hero-copy">
+        <p className="support-kicker">Products</p>
+        <h1 className="section-heading">BookMyStock Products</h1>
+        <p className="section-copy">Sleek, modern, and intuitive trading platforms.</p>
+        <p className="section-copy">
+          Check out our <a href="/products" className="section-link">investment offerings</a>.
+        </p>
+      </div>
+    </section>
+  );
 }
 
 export default Hero;

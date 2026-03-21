@@ -55,6 +55,7 @@ const Profile = () => {
     return (
       <section className="profile-page profile-page-state">
         <div className="profile-card status-card">
+          <div className="profile-loading-bar" />
           <p className="profile-kicker">Profile</p>
           <h2>Loading your account details…</h2>
           <p>Please wait while we securely fetch your information.</p>
@@ -100,7 +101,7 @@ const Profile = () => {
             <strong>{user?.email || "Not available"}</strong>
           </article>
           <article className="profile-info-item">
-            <span>Member since</span>
+            <span>Joined date</span>
             <strong>{formatDate(user?.createdAt)}</strong>
           </article>
           <article className="profile-info-item">
