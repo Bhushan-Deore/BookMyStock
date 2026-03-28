@@ -9,6 +9,7 @@ BookMyStock is a full-stack MERN application designed to help users manage and t
 - 🌐 Frontend: https://main.df2o8s39u2pcw.amplifyapp.com/
 - 📊 Dashboard: https://main.d2zver9i797lx.amplifyapp.com/
 - ⚙️ Backend API: https://bookmystock.onrender.com
+> ⚠️ Note: The app is hosted on free infrastructure, so the first load after login/signup may take a few seconds as the Backend server wakes up.
 
 ---
 
