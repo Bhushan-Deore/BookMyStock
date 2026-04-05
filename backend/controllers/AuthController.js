@@ -101,3 +101,26 @@ module.exports.Profile = async (req, res) => {
         });
     }
 };
+
+module.exports.Logout = async (_req, res) => {
+    try {
+        res.cookie("token", "", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+            expires: new Date(0),
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Logged out successfully",
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Unable to logout",
+        });
+    }
+};
