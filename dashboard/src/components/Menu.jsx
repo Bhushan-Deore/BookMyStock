@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { logoutDashboardUser } from "../config/api";
 
 const navItems = [
   { label: "Dashboard", path: "/" },
@@ -21,6 +22,7 @@ const isRouteActive = (pathname, path) => {
 const Menu = ({ onNavigate }) => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const pathname = useMemo(() => {
     const currentPath = location.pathname || "/";
@@ -33,6 +35,19 @@ const Menu = ({ onNavigate }) => {
   const closeMenu = () => {
     setIsMobileMenuOpen(false);
     onNavigate?.();
+  };
+
+  const handleLogout = async () => {
+    if (isLoggingOut) {
+      return;
+    }
+
+    try {
+      setIsLoggingOut(true);
+      await logoutDashboardUser();
+    } catch (error) {
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -68,6 +83,15 @@ const Menu = ({ onNavigate }) => {
         </ul>
 
         <div className="menu-divider" />
+
+        <button
+          type="button"
+          className="menu logout-menu-button"
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+        >
+          {isLoggingOut ? "Logging out..." : "Logout"}
+        </button>
 
         <Link
           className={`profile-link ${isRouteActive(pathname, "/profile") ? "active" : ""}`}

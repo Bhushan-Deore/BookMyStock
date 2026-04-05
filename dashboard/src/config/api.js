@@ -26,6 +26,19 @@ export const clearAuthToken = () => {
   window.localStorage.removeItem(AUTH_TOKEN_KEY);
 };
 
+export const logoutDashboardUser = async () => {
+  await apiClient.post(
+    "/logout",
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+
+  clearAuthToken();
+  window.location.href = FRONTEND_URL;
+};
+
 export const bootstrapAuthTokenFromUrl = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const searchToken = searchParams.get("token");
